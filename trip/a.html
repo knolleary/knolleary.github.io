@@ -1,0 +1,153 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+<style>
+body {
+   font-family: helvetiva, arial, sans-serif;
+}
+#content h1 {
+   margin: 0px;
+   padding: 5px;
+   background: #9a9;
+   color: #efe;
+}
+#date, #distance {
+   text-align: right;
+   padding: 2px;
+   padding-right: 5px;
+   font-size: 0.8em;
+   background: #efe;
+   color: #9a9;
+}
+
+#distance code {
+   font-size: 1.4em;
+}
+#distance {
+   border-bottom: 1px solid #9a9;
+}
+#bodyContent {
+   margin: 0px;
+   padding: 5px;
+}
+
+#content ul {
+   border-top: 1px solid #9a9;
+   text-align: center;
+   list-style: none;
+   margin: 0px;
+   padding: 0px;
+}
+#content li {
+   margin: 0px;
+   padding: 0px 20px;
+   display: inline;
+   background: #efe;
+   font-size: 1.1em;
+}
+#content a {
+   text-decoration: none;
+   color: #9a9;
+}
+</style>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+
+var map = null;
+
+var infoWindows = [];
+
+
+var image = new google.maps.MarkerImage('images/cv.png',
+   new google.maps.Size(75, 40),
+   // The origin for this image
+   new google.maps.Point(0,0),
+   // The anchor for this image
+   new google.maps.Point(32, 40));
+var shadow = new google.maps.MarkerImage('images/shadow.png',
+   new google.maps.Size(75, 40),
+   new google.maps.Point(0,0),
+   new google.maps.Point(32, 40));
+
+function addMarkers(data) {
+   for (d in data['events']) {
+      var i = parseInt(d);
+      var e = data['events'][i];
+      eval("var latlong = new google.maps.LatLng("+e['latlong']+");");
+      
+      var nav = '<ul><li>';
+      if (i>0) {
+         nav += '<a href="#" onclick="openWindow('+data['events'][i-1]['id']+'); return false;">&laquo;</a>';
+      }
+      nav += "</li><li>";
+      if (i<(data['events'].length-1)) {
+         nav += '<a href="#" onclick="openWindow('+data['events'][i+1]['id']+'); return false;">&raquo;</a>';
+      }
+      nav += "</li></ul>";
+      var contentString = '<div id="content">'+
+'<h1>'+e['title']+'</h1>'+
+'<div id="date">'+(new Date(parseInt(e['timestamp'])*1000)).toLocaleString()+'</div>'+
+'<div id="distance">distance: <code>'+e['distance']+'</code></div>'+
+'<div id="bodyContent">'+
+'<p>'+e['description']+'</p>'+
+'</div>'+
+'<div id="nav">'+nav+'</div>'+
+'</div>';
+
+      
+      addMarker(e['id'],latlong,e['title'],contentString);
+   }
+}
+$(document).ready(function() {
+      var latlng = new google.maps.LatLng(-41,174.221191);
+      var myOptions = {
+         zoom: 6,
+         center: latlng,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+      
+      google.maps.event.addListener(map, 'dblclick', function(me) {
+            //alert(me.latLng.toString());
+      });
+      $.get("events.php",function(data){
+            eval("addMarkers("+data+")");
+      });
+
+});
+
+function openWindow(id) {
+   for (i in infoWindows) {
+      if (i != id) {
+         infoWindows[i].close();
+      }
+   }
+   infoWindows[id].open(map,infoWindows[id].marker);
+}
+
+function addMarker(id,latLng, title, content) {
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: title,
+        shadow: shadow,
+        icon: image
+    });
+    var infowindow = new google.maps.InfoWindow({
+        content: content
+    });
+    infowindow.marker = marker;
+    google.maps.event.addListener(marker, 'click', function() {
+          openWindow(id);
+    });
+    infoWindows[id] = infowindow;
+}
+
+
+</script>
+</head>
+<body>
+  <div id="map_canvas" style="width:100%; height:100%"></div>
+</body>
+</html>

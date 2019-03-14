@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>knolleary &raquo; games  &raquo; Scroller</title>
+<script LANGUAGE="JavaScript" SRC="s.js"></script> 
+</head>
+<body onload="init();" style="background: #eea; font-family: serif;" onkeydown="return handleKeyDown(event);" onkeyup="return handleKeyUp(event);">
+
+<div id="board" style="overflow: hidden; position: absolute; top: 20px; left: 20px; width: 600px; height: 480px; background: #000;">
+<div id="score" style="position: absolute; right: 5px; top: 5px; width: 100px; height: 20px; color: #ff0; text-align: right; font-weight: bold; font-size: 18px; font-family: serif; z-index: 900;">000000</div>
+</div>
+<div id="info" style="position: absolute; top: 20px; left: 640px; width: 200px; height: 480px;">
+The beginnings of a Mario-like game.<p/>
+Be careful, you only have one life!<p/>
+There <em>is</em> a right-hand edge to the world, but it may take you a while to get there.<p/>
+a: left<br/>
+d: right<br/>
+w: jump<br/>
+
+</div>
+<div id="debug" style="display:none; overflow: scroll; position: absolute; top: 520px; left: 20px; width: 600px; height: 480px; background: #fff;"></div>
+
+</body>
+</html>
+

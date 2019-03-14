@@ -1,0 +1,17 @@
+# Dependencies
+markdown:         kramdown
+highlighter:      pygments
+
+# Permalinks
+permalink: /:year/:month/:day/:title
+
+# Setup
+title:            knolleary
+tagline:          "Things by Nick O'Leary"
+description:      'Words and things by Nick O&apos;Leary.'
+url:              http://hyde.getpoole.com
+baseurl:          /
+
+author:
+  name:           "Nick O'Leary"
+  url:            https://twitter.com/knolleary

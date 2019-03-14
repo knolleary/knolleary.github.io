@@ -1,0 +1,203 @@
+<html>
+<head>
+<title>Logic Gate Thing</title>
+<script LANGUAGE="JavaScript" SRC="Mouse.js"></script>
+<script LANGUAGE="JavaScript" SRC="Animator.js"></script>
+<script LANGUAGE="JavaScript" SRC="Interface.js"></script>
+<script LANGUAGE="JavaScript" SRC="logic.js"></script>
+<style>
+body {
+   background: url("images/grid.png") white repeat;
+}
+
+#ok {
+   position: absolute;
+   width: 200px;
+   height: 30px;
+   border: #999 1px dashed;
+   right: 20px;
+   bottom: 20px;
+   text-align: center;
+   cursor: pointer;
+}
+#about {
+   position: absolute;
+   width: 670px;
+   height: 600px;
+   left: 150px;
+   top: 40px;
+   background: #f9f9f9;
+   border: #999 3px solid;
+   padding: 10px;
+   font-family: Helvetica;
+   font-size: 1.2em;
+   line-height: 1.5em;
+   color: #666;
+   overflow: hidden;
+   z-index: 100;
+}
+
+#about img {
+   margin-left: 13px;
+   border: 1px dashed #aaa;
+}
+
+#palette {
+   position: absolute;
+   top: 10px;
+   left: -150px;
+   width: 70px;
+   height: 600px;
+   background: #eff;
+   border: 2px solid #999;
+}
+
+#trash {
+   position: absolute;
+   top: 620px;
+   left: -150px;
+   width: 70px;
+   height: 70px;
+   background: #fee;
+   border: 2px solid #999;
+   font-family: Helvetica;
+   font-size: 14px;
+   font-weight: bold;
+   text-align: center;
+}
+#help {
+   position: absolute;
+   top: 700px;
+   left: -150px;
+   width: 70px;
+   height: 20px;
+   border: 2px solid #999;
+   font-family: Helvetica;
+   font-size: 14px;
+   font-weight: bold;
+   text-align: center;
+   cursor: pointer;
+}
+   
+.paletteItem {
+   position: absolute;
+   width: 50px;
+   height: 70px;
+   left: 8px;
+   border: 1px dashed #999;
+   font-family: Helvetica;
+   font-size: 14px;
+   font-weight: bold;
+   text-align: center;
+   cursor: move;
+}
+   
+
+.gate {
+   position: absolute;
+   background: #efe;
+   border: 1px solid #999;
+   width: 50px;
+   height: 50px;
+   text-align: center;
+   font-family: Helvetica;
+}
+.gateHandle {
+   position: absolute;
+   background: none;
+   left: 5px;
+   top: 5px;
+   bottom: 5px;
+   right: 5px;
+   cursor: move;
+}
+.gateControl {
+   position:absolute;
+   width: 20px;
+   height: 20px;
+   cursor: pointer;
+   top: 15px;
+}
+
+.and {
+   background: #efe  url("images/gate-and.png") no-repeat bottom;
+}
+.not {
+   background: #efe  url("images/gate-not.png") no-repeat bottom;
+}
+.or {
+   background: #efe  url("images/gate-or.png") no-repeat bottom;
+}
+.nand {
+   background: #efe  url("images/gate-nand.png") no-repeat bottom;
+}
+.nor {
+   background: #efe  url("images/gate-nor.png") no-repeat bottom;
+}
+.inoff, .input {
+   background: #efe  url("images/in-off.png") no-repeat bottom;
+}
+.outoff, .output {
+   background: #efe  url("images/out-off.png") no-repeat bottom;
+}
+.inon {
+   background: #efe  url("images/in-on.png") no-repeat bottom;
+}
+.outon {
+   background: #efe  url("images/out-on.png") no-repeat bottom;
+}
+
+.node {
+   position: absolute;
+   background: #efe;
+   border: 1px solid #999;
+   width: 10px;
+   height: 10px;
+   cursor: crosshair;
+}
+
+.on {
+   background: #ee5;
+}
+.off {
+   background: #efe;
+}
+.error {
+   background: #f55;
+}
+.active {
+   background: #fee;
+}
+
+
+</style>
+</head>
+<body id='body' onload="init();">
+<div id='palette'></div><div id='trash'>trash</div>
+<div onclick="showAbout();" id='help'  class="off" onmouseover="this.className='on';" onmouseout="this.className='off';">?</div>
+<div id='about'>
+<h2><center>Logic Gate Thing</center></h2>
+<img src="images/ss1.png" />
+<img src="images/ss3.png" />
+<img src="images/ss2.png" />
+<img src="images/ss5.png" />
+<ol>
+<li>Drag elements onto the page</li>
+<li>Drag between connectors to join elements.<br /><span class="smaller">Outputs can have more than one connection, inputs can only have one.<br />Connections can be detached from the input end.</span></li>
+<li>Toggle inputs on and off</li>
+<li>Unwanted elements can be dragged into the trash</li>
+</ol>
+<div id='ok' class="off" onclick="hideAbout();" onmouseover="this.className='on';" onmouseout="this.className='off';">let me play...</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3408539-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

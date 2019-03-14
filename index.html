@@ -1,0 +1,24 @@
+---
+layout: default
+title: Home
+---
+
+<h1>Hello.</h1>
+
+
+{% for post in site.posts %}
+    {% unless post.next %}
+        <h2>{{ post.date | date: '%Y' }}</h2>
+        <ul class="post-list">
+    {% else %}
+        {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+        {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+        {% if year != nyear %}
+            </ul>
+            <h2 class="category-title">{{ post.date | date: '%Y' }}</h2>
+            <ul class="post-list">
+        {% endif %}
+    {% endunless %}
+    <li class="post-list-item"><a href="{{ post.url }}">{{ post.title }}<span class="post-list-date">{{ post.date | date: '%e %B' }}</span></a></li>
+{% endfor %}
+</ul>

@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <title>Power</title>
+    <script type="text/javascript" src="protovis-r3.2.js"></script>
+    <script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="power.js"></script>
+<style type="text/css">
+
+body {
+   margin:0;
+   padding:0;
+   background: #eee;
+}
+#center {
+   margin:auto;
+   padding:20px;
+}
+
+#years {
+   background: #fff;
+   margin: auto;
+   width: 575px;
+   height: 30px;
+   border: 1px solid #999;
+   text-align: center;
+}
+#year {
+  background: #fff;
+  margin: auto;
+  margin-top: 5px;
+  width: 575px;
+  height: 60px;
+  border: 1px solid #999;
+  text-align: center;
+}
+    
+#month {
+  background: #fff;
+  margin: auto;
+  margin-top: 5px;
+  width: 575px;
+  height: 250px;
+  border: 1px solid #999;
+}
+
+#day {
+  background: #fff;
+  margin: auto;
+  margin-top: 5px;
+  width: 575px;
+  height: 250px;
+  border: 1px solid #999;
+}
+#blurb {
+   background:#fff;
+   margin: auto;
+   margin-top: 5px;
+   margin-bottom: 5px;
+   width:575px;
+   height:auto;
+   border: 1px solid #999;
+   text-align: center;
+   font-family: Arial, Sans-serif;
+   color: #999;
+}
+a,a:visited { color: #339; text-decoration:none; }
+a:hover { text-decoration: underline; }
+
+#info {
+   background:#fff;
+   margin: auto;
+   margin-top: 5px;
+   width:575px;
+   height:auto;
+   border: 1px solid #999;
+   text-align: center;
+   font-family: Arial, Sans-serif;
+   color: #999;
+}
+.more { color: #f99; }
+.less { color: #9f9; }
+#daycost { font-size: 3em; color: #888;}
+#daydeltacost { font-size: 2em; }
+#monthcost { font-size: 2em; }
+#yearcost { font-size: 1.5em; }
+    </style>
+	<script type="text/javascript">//<![CDATA[
+	// Google Analytics for WordPress by Yoast v4.06 | http://yoast.com/wordpress/google-analytics/
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount','UA-3408539-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	// End of Google Analytics for WordPress by Yoast v4.0
+	//]]></script>
+</head>
+<body><div id="center">
+<div id="blurb">This is a static snapshot of my energy usage over the last month or so. The live version is hidden away for the time being. You can read more about it <a href="http://knolleary.net/?p=945">here &raquo;</a>.</div>
+<div id="years"><script>nolPower.create_years_graph();</script></div>
+<div id="year"><script>nolPower.create_year_graph();</script></div>  
+<div id="month"><script>nolPower.create_month_graph();</script></div>
+<div id="day"><script>nolPower.create_day_graph();</script></div>
+<div id="info">This day has cost <span id="daycost"></span> which is <span class="" id="daydeltacost"></span>than the average for the month. The month has cost <span id="monthcost"></span><!-- and the year <span id="yearcost"></span> -->.</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<html>
+<head>
+<title>New Zealand 2009 &laquo;  knolleary</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+<style>
+body {
+   font-family: helvetiva, arial, sans-serif;
+}
+#container h1 {
+   text-align: right;
+   margin: 0px;
+   font-size: 3em;
+   color: #9a9;
+}
+#inner {
+    margin: auto;
+    width:1050px;
+    border: 1px solid #9a9;
+}
+#side {
+   margin: 2px;
+   width: 246px;
+   height: 596px;
+   float: left;
+}
+img {
+   border: none;
+}
+#total_distance {
+   border: 1px solid #dcd;
+   margin: 5px;
+   padding: 3px;
+   height: 30px;
+   font-family: monospace;
+   font-size: 2em;
+   color: #676;
+   text-align: right;
+}
+#sideinfo {
+   border: 1px solid #dcd;
+   margin: 5px;
+   padding: 3px;
+   height: 104px;
+   font-size: 0.9em;
+   color: #676;
+}
+#links {
+   border: 1px solid #dcd;
+   margin: 5px;
+   padding: 3px;
+   height: 33px;
+   font-size: 0.9em;
+   color: #676;
+   text-align: center;
+}
+#photos {
+   margin: auto;
+   background: #eee;
+   padding: 5px;
+   width: 1040px;
+   height: 100px;
+   border: 1px solid #9a9;
+   border-top: none;
+}
+#imagecontainer {
+   margin: 5px;
+   border: 1px solid #f00;
+   height: 100px;
+   width: 250px;
+   overflow: hidden;
+}
+#images {
+   width: 1200px;
+}
+.photo {
+   padding-right: 5px;
+   height: 100%;
+}
+
+#side ul {
+   border: 1px solid #dcd;
+   margin: 5px;
+   padding: 3px;
+   height: 375px;
+   overflow: scroll;
+}
+#side ul li {
+   padding: 0px 5px;
+   margin: 0px;
+   list-style: none;
+}
+#side ul li a {
+   text-decoration: none;
+   color: #676;
+}
+
+#side ul li.date {
+   cursor: default;
+   text-align: right;
+   font-size: 0.8em;
+   color: #8b8;
+}
+
+#graph {
+   margin: 5px 7px;
+   width: 1036px;
+   height: 150px;
+   border: 1px solid #dcd;
+}
+#map_canvas {
+   margin: 2px;
+   width: 796px;
+   height: 596px;
+}
+
+#content h1 {
+   text-align: left;
+   font-size: 1.2em;
+   margin: 0px;
+   color: #9a9;
+}
+#date, #distance {
+   padding: 2px;
+   padding-right: 5px;
+   font-size: 0.7em;
+   color: #8b8;
+}
+#nav {
+}
+
+#distance code {
+   font-size: 1.4em;
+}
+#bodyContent {
+   margin: 0px;
+}
+
+#content ul {
+   border-top: 1px solid #9a9;
+   text-align: center;
+   list-style: none;
+   margin: 0px;
+   padding: 0px;
+}
+#content li {
+   margin: 0px;
+   padding: 0px 20px;
+   display: inline;
+   background: #efe;
+   font-size: 1.1em;
+}
+#content a, #sideinfo a  {
+   text-decoration: none;
+   color: #898;
+}
+
+</style>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="protovis-r3.2.js"></script>
+<script type="text/javascript">
+
+var map = null;
+
+var pathCoordinates = [];
+var poly = null;
+
+var infoWindows = [];
+var firstEvent = -1;
+
+var image = new google.maps.MarkerImage('images/cv.png',
+   new google.maps.Size(75, 35),
+   // The origin for this image
+   new google.maps.Point(0,0),
+   // The anchor for this image
+   new google.maps.Point(32, 35));
+var shadow = new google.maps.MarkerImage('images/shadow.png',
+   new google.maps.Size(75, 35),
+   new google.maps.Point(0,0),
+   new google.maps.Point(32, 35));
+
+function addMarkers(data) {
+   for (d in data['events']) {
+      var i = parseInt(d);
+      var e = data['events'][i];
+      eval("var latlong = new google.maps.LatLng("+e['latlong']+");");
+      if (firstEvent == -1) {
+         firstEvent = e['id'];
+      }
+      var nav = '<ul><li>';
+      if (i>0) {
+         nav += '<a href="#'+data['events'][i-1]['id']+'" onclick="openWindow('+data['events'][i-1]['id']+'); return false;">&laquo;</a>';
+      }
+      nav += "</li><li>";
+      if (i<(data['events'].length-1)) {
+         nav += '<a href="#'+data['events'][i+1]['id']+'" onclick="openWindow('+data['events'][i+1]['id']+'); return false;">&raquo;</a>';
+      }
+      nav += "</li></ul>";
+      var date = new Date(parseInt(e['timestamp'])*1000);
+      var contentString = '<div id="content">'+
+'<h1>'+e['title']+'</h1>'+
+'<div id="date">'+(date).toLocaleString()+'</div>'+
+'<div id="distance">distance: <code>'+e['distance']+'</code></div>'+
+'<div id="bodyContent">'+
+'<p>'+e['description']+'</p>'+
+//'<div id="imagecontainer"><div id="images"></div></div>'+
+'</div>'+
+'<div id="nav">'+nav+'</div>'+
+'</div>';
+      addMarker(e['id'],date,latlong,e['distance'],e['title'],contentString);
+   }
+   
+   graph.add(pv.Line)
+      .data(function(){return data['events']})
+      .left(function(d){return sx(d['timestamp'])})
+      .bottom(function(d){return sy(d['distance'])})
+      .strokeStyle("#99f")
+      .lineWidth(4)
+      .add(pv.Dot)
+      .lineWidth(1)
+      .strokeStyle("#33f");
+   ;
+   graph.render();
+
+   
+   $("#total_distance").html(total_distance+"km");
+   
+   if (window.location.hash) {
+      var eid = window.location.hash.substring(1);
+      if (infoWindows[eid]) {
+         openWindow(eid);
+      }
+   } else if (firstEvent > -1) {
+      openWindow(firstEvent);
+   }
+}
+var zoom_changed = false;
+$(document).ready(function() {
+      var latlng = new google.maps.LatLng(-41,174.221191);
+      var myOptions = {
+         zoom: 5,
+         center: latlng,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+      
+      //pathCoordinates = new google.maps.MVCArray();
+      //
+      //var polyOptions = {
+      //   path: pathCoordinates,
+      //   strokeColor: '#333333',
+      //   strokeOpacity: 0.8,
+      //   strokeWeight: 3
+      //}
+      //poly = new google.maps.Polyline(polyOptions);
+      //poly.setMap(map);
+
+      google.maps.event.addListener(map, 'zoom_changed', function(me) {
+            zoom_changed = true;
+      });      
+      google.maps.event.addListener(map, 'dblclick', function(me) {
+            //alert(me.latLng.toString());
+      });
+      $.get("events.php",function(data){
+            eval("addMarkers("+data+")");
+      });
+});
+
+function openWindow(id) {
+   for (i in infoWindows) {
+      if (i != id) {
+         infoWindows[i].close();
+         $("#listitem"+i).css("background","none");
+      }
+   }
+   $("#listitem"+id).css("background","#cdc");
+   infoWindows[id].open(map,infoWindows[id].marker);
+   window.location.hash = id;
+   
+   if (!zoom_changed) {
+      map.setZoom(8);
+   }
+   
+   //$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?id=27399341@N00&tags=arduino&format=json&jsoncallback=?",
+   //function(data){
+   //   $.each(data.items, function(i,item){
+   //         $('<img class="photo"/>').attr("src", item.media.m).appendTo("#photos");
+   //   });
+   //});
+
+}
+var total_distance = 0;
+
+var curdate = "";
+function addMarker(id, date, latLng, dist, title, content) {
+   var i = parseInt(dist);
+   if (i > total_distance) {
+      total_distance = i;
+   }
+   
+   //var path = poly.getPath();
+   //path.insertAt(pathCoordinates.length, latLng);
+
+   
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: title,
+        shadow: shadow,
+        icon: image
+    });
+    var infowindow = new google.maps.InfoWindow({
+        content: content,
+        maxWidth: 350
+    });
+    infowindow.marker = marker;
+    google.maps.event.addListener(marker, 'click', function() {
+          openWindow(id);
+    });
+    infoWindows[id] = infowindow;
+    if (date.toDateString() != curdate) {
+       curdate = date.toDateString();
+       $("#list").append('<li class="date">'+curdate+'</li>');
+    }
+    $("#list").append('<li id="listitem'+id+'"><a href="#'+id+'" onclick="openWindow('+id+'); return false;" >'+title+'</a></li>');
+}
+
+var graph;
+var graphData = [];
+var sy = pv.Scale.linear(0,4500).range(19,139);
+var sx = pv.Scale.linear(1249750605,1251710400).range(40,1000);
+function create_graph() {
+   graph = new pv.Panel().width(1036).height(150);
+   graph.add(pv.Rule)
+      .left(40)
+      .bottom(19)
+      .height(120)
+      .strokeStyle("#999");
+   graph.add(pv.Rule)
+      .left(40)
+      .bottom(19)
+      .width(960)
+      .strokeStyle("#999");
+      
+   graph.add(pv.Rule)
+      .data(pv.range(1249772400,1251759600,86400))
+      .left(function(d){return sx(d)})
+      .bottom(10)
+      .height(9)
+      .strokeStyle("#999");
+
+   graph.add(pv.Rule)
+      .data(pv.range(0,4500,1000))
+      .left(33)
+      .bottom(function(d){return sy(d)})
+      .width(7)
+      .strokeStyle("#999");
+   graph.add(pv.Rule)
+      .data(pv.range(500,4500,1000))
+      .left(36)
+      .bottom(function(d){return sy(d)})
+      .width(4)
+      .strokeStyle("#999");
+      
+   graph.add(pv.Rule)
+      .data(pv.range(0,4500,500))
+      .left(41)
+      .bottom(function(d){return sy(d)})
+      .width(959)
+      .strokeStyle("#ccc");
+
+   graph.render();
+}
+   
+</script>
+</head>
+<body>
+<div id="container">
+<div id="inner">
+<h1>New Zealand, 2009</h1>
+ <div id="side"><ul id="list"></ul>
+ <div id="total_distance"></div>
+ <div id="sideinfo">
+ We drove around New Zealand in a camper van in 2009. I updated
+ this page as we went.
+ It was all a bit experiemental, having been thrown together at the last minute.<br/>
+ <a href="http://knolleary.net/2009/08/07/twitterlogue/">&raquo; more info</a></div>
+ <div id="links"><a href="http://twitter.com/knolleary"><img src="images/twitter.png" /></a> <a href="http://www.flickr.com/photos/knolleary/tags/nz09"><img src="images/flickr.png" /></a> <a href="rss.php"><img src="images/feeds.png" /></a></div>
+</div>
+ <div id="map_canvas"></div>
+ <div id="graph"><script>create_graph()</script></div>
+</div>
+</div>
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-3408539-1");
+		} catch(err) {}
+	</script>
+	<script type="text/javascript">
+		try {
+			// Cookied already: 
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+</body>
+</html>
+
+

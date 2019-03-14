@@ -1,0 +1,16 @@
+.post-list {
+    list-style-type: none;
+    padding: 0;
+}
+.post-list-item {
+    clear: both;
+    display: block;
+}
+
+.post-list-item .post-list-date {
+    float: right;
+    color: #aaa;
+}
+
+.sidebar-nav-item.active:after {
+}
