@@ -5,10 +5,6 @@ description: How we torn apart the internals of Node-RED and glued it back toget
 image: /blog/content/2019/03/packages.png
 ---
 
-_**Subtitle:** How we torn apart the internals of Node-RED and glued it back together
- without users knowing._
-
-
 There are two logical parts of Node-RED; the runtime where flows run and the editor
 where flows are edited. Ever since the start of the project, these two parts have
 been bundled together in a single blob of npm module.
