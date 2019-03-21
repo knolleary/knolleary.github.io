@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Managing multiple npm modules in a single repository
-description: How we torn apart the internals of Node-RED and glued it back together without users knowing
+description: How we tore apart the internals of Node-RED and glued it back together without users knowing
 image: /blog/content/2019/03/packages.png
 ---
 
