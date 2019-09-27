@@ -2,6 +2,7 @@
 layout: page
 title: Talks
 ---
+*   [JS Party #95](https://changelog.com/jsparty/95)
 *   [Wiring the Internet of Things with Node-RED<br><span style="font-size: 0.9em; color:#999">Node Summit 2017</span>](https://vimeo.com/228918093)
 *   [Interview with theCUBE on Node-RED<br><span style="font-size: 0.9em; color:#999">Node Summit 2017</span>](https://www.youtube.com/watch?v=pzYAQkkFaXI)
 *   [A tale of getting stuff done when you're 1 in 400,000<br><span style="font-size: 0.9em; color:#999">Monki Gras 2016</span>](https://www.youtube.com/watch?v=Bbg1017amZs)
