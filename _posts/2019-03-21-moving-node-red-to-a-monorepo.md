@@ -17,6 +17,10 @@ know what we've done.
 This post describes how we went about doing that and some of the challenges we faced
 along the way. If you want to see it for yourself, the code is [here](https://github.com/node-red/node-red).
 
+This blog post was presented at LNUG in September 2019.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_r4emDWlApA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ### One-vs-Many repositories.
 
 When I started looking at how to structure the code to support this approach, I
