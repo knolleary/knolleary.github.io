@@ -6,7 +6,7 @@ title: Twenty Nineteen
 So, 2019 happened. Herewith some thoughts about the last year and reflecting on
 what's to come.
 
-tl;dr: The world is literally on fire, Brexit is happening, we're lead by liars,
+tl;dr: The world is literally on fire, Brexit is happening, we're led by liars,
 cheats and idiots, and I'm no nearer to 13st then I was a year ago. But despite
 it all being a mess, there's still plenty to do every day and with some focussed effort,
 it will all be okay in the end. Except maybe Brexit - nothing good can come from that.
@@ -46,7 +46,6 @@ from our work, but very few willing or able to pay that back. It's a
 hard problem and one that doesn't have an easy answer. It just so happens I'm at
 the sharp end of that deal. In general, I'm okay with that, but there are certainly
 times when I wish we could do more.
-
 
 Ever since Dave and I created Node-RED, I've been in roles that have enabled me
 to justify spending time on it. For example, when I was in Emerging Technologies,
