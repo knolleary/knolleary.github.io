@@ -3,6 +3,7 @@ layout: post
 title: Moving Node-RED to a monorepo with multiple modules
 description: How we tore apart the internals of Node-RED and glued it back together without users knowing
 image: /blog/content/2019/03/packages.png
+tags: ["code","tech","node-red"]
 ---
 
 There are two logical parts of Node-RED; the runtime where flows run and the editor
