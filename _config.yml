@@ -15,3 +15,7 @@ author:
   name:           "Nick O'Leary"
   url:            https://twitter.com/knolleary
   twitter:        "@knolleary"
+
+plugins:
+    - jekyll-paginate
+    - jekyll-redirect-from
