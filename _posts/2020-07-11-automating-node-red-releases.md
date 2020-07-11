@@ -182,7 +182,7 @@ the smallest set of permissions possible.
 I've seen GitHub acknowledge their personal access tokens need finer grained scopes
 down to individual repositories, but until that happens, we'll stick with the bot user.
 
-### Done
+### Done, for now
 
 Now, whenever I tag a new release, within a couple minutes pull requests arrive
 on the docker and website repositories with all the updates that are needed.
