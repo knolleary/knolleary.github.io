@@ -3,7 +3,7 @@ layout: post
 title: Opening a new iTerm window on OSX
 ---
 
-I just got a new Macbook Pro (13" M1 8Gb 512Gb if you must know). This is my
+I just got a new MacBook Pro (13" M1 8Gb 512Gb if you must know). This is my
 third Mac but the first I have bought for myself - the other's being
 work-provided machines.
 
@@ -11,7 +11,7 @@ I'm taking my time to set it up - doing it afresh rather than just blindly copyi
 over all my settings. Whilst it's more work to do it this way, it happens rarely
 enough that I find it a soothing process. It also helps to clear out the cruft
 that has gathered in my setup over the years. Given I've only *just* updated my work
-Macbook to Big Sur, I'm also taking my time to see what's changed.
+MacBook to Big Sur, I'm also taking my time to see what's changed.
 
 One of the things I setup on my first laptop a long, long time ago was global
 keyboard shortcut to open a new iTerm window. So long ago, I couldn't remember
