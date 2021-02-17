@@ -70,9 +70,11 @@ A record of our holiday in New Zealand which used twitter and google maps to plo
 
 ---
 
-### [She Went of Her Own Accord](http://shewentofherownaccord.com)
+### She Went of Her Own Accord
 <img src="/blog/content/2009/02/swohoa.png" title="swohoa" />
-A collaboration with <a href="http://rooreynolds.com">Roo</a>.
+A collaboration with <a href="http://rooreynolds.com">Roo</a>, full of bad jokes.
+Sadly the site has been lost to the graveyard of expired domains and deleted
+databases.
 
 ---
 
