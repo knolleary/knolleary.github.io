@@ -11,7 +11,7 @@ Today, March 16th 2021, is my last working day at IBM. I have a couple weeks of 
 
 That still feels an odd thing to write even though I've known this was coming for little while now.
 
-Through-out my career at IBM, I've often wondered want would pull me away from the relative comfort of the institution that is IBM.
+Through-out my career at IBM, I've often wondered what would pull me away from the relative comfort of the institution that is IBM.
 I have certainly had occasional offers from different companies and many of them would have been interesting, engaging work. But none of them quite sparkled enough to draw me away.
 
 I knew in my head what my dream opportunity would be - to have the freedom to build something *bigger* with Node-RED whilst continuing to lead the open-source project. But what were the chances of that ever happening?
