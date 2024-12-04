@@ -12,8 +12,8 @@ He spends his time playing with IoT technologies, having worked on projects rang
 With a background in pervasive messaging, he has contributed to the [Eclipse Paho](http://eclipse.org/paho)
 and was a member of the [OASIS MQTT Technical Committee](https://www.oasis-open.org/committees/mqtt/).
 
+ - [Bluesky](https://bsky.app/profile/knolleary.net)
  - [Mastodon](https://mastodon.me.uk/@knolleary)
- - [Twitter](https://twitter.com/knolleary)
  - [GitHub](https://github.com/knolleary)
  - [LinkedIn](https://www.linkedin.com/in/nickoleary/)
  - [Mail](mailto:nick.oleary@gmail.com)
